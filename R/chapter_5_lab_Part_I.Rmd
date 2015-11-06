@@ -1,0 +1,271 @@
+---
+title: "Chapter 5 Lab"
+author: "coop711"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, echo=FALSE}
+library(pander)
+library(knitr)
+source("adjoint.R")
+ls()
+```
+
+### 5.
+
+#### 5.1   
+
+##### (a) $A=\begin{bmatrix}6&13\\5&12\end{bmatrix}$
+
+```{r, 5.1.(a)}
+(A1 <- matrix(c(6, 5, 13, 12), 2))
+minor(A1, 1, 1)
+minor(A1, 2, 1)
+minor(A1, 1, 2)
+minor(A1, 2, 2)
+cofactor(A1, 1, 1)
+cofactor(A1, 2, 1)
+cofactor(A1, 1, 2)
+cofactor(A1, 2, 2)
+A1[1, 1]*cofactor(A1, 1, 1) + A1[2, 1]*cofactor(A1, 2, 1)
+A1[1, 2]*cofactor(A1, 1, 2) + A1[2, 2]*cofactor(A1, 2, 2)
+det(A1)
+adjoint(A1)
+1/det(A1) * adjoint(A1)
+solve(A1)
+A1 %*% solve(A1)
+solve(A1) %*% A1
+```
+
+##### (b) $B=\begin{bmatrix}3&-4\\7&14\end{bmatrix}$
+
+```{r, 5.1.(b)}
+(B1 <- matrix(c(3, 7, -4, 14), 2))
+minor(B1, 1, 1)
+minor(B1, 2, 1)
+minor(B1, 1, 2)
+minor(B1, 2, 2)
+cofactor(B1, 1, 1)
+cofactor(B1, 2, 1)
+cofactor(B1, 1, 2)
+cofactor(B1, 2, 2)
+B1[1, 1]*cofactor(B1, 1, 1) + B1[2, 1]*cofactor(B1, 2, 1)
+B1[1, 2]*cofactor(B1, 1, 2) + B1[2, 2]*cofactor(B1, 2, 2)
+det(B1)
+adjoint(B1)
+1/det(B1) * adjoint(B1)
+solve(B1)
+B1 %*% solve(B1)
+solve(B1) %*% B1
+round(solve(B1) %*% B1, digits = 2)
+```
+
+#### 5.2
+
+```{r, 5.2}
+A1 %*% B1
+solve(A1 %*% B1)
+solve(B1)
+solve(A1)
+solve(B1) %*% solve(A1)
+```
+
+#### 5.3
+
+##### (a) $A=\begin{bmatrix}-1&3&0\\0&2&1\\1&0&4\end{bmatrix}$
+
+```{r, 5.3.(a)}
+(A3 <- matrix(c(-1, 0, 1, 3, 2, 0, 0, 1, 4), 3))
+minor(A3, 1, 1)
+minor(A3, 2, 1)
+minor(A3, 3, 1)
+minor(A3, 1, 2)
+minor(A3, 2, 2)
+minor(A3, 3, 2)
+minor(A3, 1, 3)
+minor(A3, 2, 3)
+minor(A3, 3, 3)
+cofactor(A3, 1, 1)
+cofactor(A3, 2, 1)
+cofactor(A3, 3, 1)
+cofactor(A3, 1, 2)
+cofactor(A3, 2, 2)
+cofactor(A3, 3, 2)
+cofactor(A3, 1, 3)
+cofactor(A3, 2, 3)
+cofactor(A3, 3, 3)
+A3[1, 1]*cofactor(A3, 1, 1) + A3[2, 1]*cofactor(A3, 2, 1) + A3[3, 1]*cofactor(A3, 3, 1)
+A3[1, 2]*cofactor(A3, 1, 2) + A3[2, 2]*cofactor(A3, 2, 2) + A3[3, 2]*cofactor(A3, 3, 2)
+A3[1, 3]*cofactor(A3, 1, 3) + A3[2, 3]*cofactor(A3, 2, 3) + A3[3, 3]*cofactor(A3, 3, 3)
+det(A3)
+adjoint(A3)
+1/det(A3) * adjoint(A3)
+solve(A3)
+A3 %*% solve(A3)
+round(A3 %*% solve(A3), digits = 2)
+solve(A3) %*% A3
+```
+
+##### (b) $B=\begin{bmatrix}10&6&-1\\6&5&4\\-1&4&17\end{bmatrix}$
+
+```{r, 5.3.(b)}
+(B3 <- matrix(c(10, 6, -1, 6, 5, 4, -1, 4, 17), 3))
+minor(B3, 1, 1)
+minor(B3, 2, 1)
+minor(B3, 3, 1)
+minor(B3, 1, 2)
+minor(B3, 2, 2)
+minor(B3, 3, 2)
+minor(B3, 1, 3)
+minor(B3, 2, 3)
+minor(B3, 3, 3)
+cofactor(B3, 1, 1)
+cofactor(B3, 2, 1)
+cofactor(B3, 3, 1)
+cofactor(B3, 1, 2)
+cofactor(B3, 2, 2)
+cofactor(B3, 3, 2)
+cofactor(B3, 1, 3)
+cofactor(B3, 2, 3)
+cofactor(B3, 3, 3)
+B3[1, 1]*cofactor(B3, 1, 1) + B3[2, 1]*cofactor(B3, 2, 1) + B3[3, 1]*cofactor(B3, 3, 1)
+B3[1, 2]*cofactor(B3, 1, 2) + B3[2, 2]*cofactor(B3, 2, 2) + B3[3, 2]*cofactor(B3, 3, 2)
+B3[1, 3]*cofactor(B3, 1, 3) + B3[2, 3]*cofactor(B3, 2, 3) + B3[3, 3]*cofactor(B3, 3, 3)
+det(B3)
+adjoint(B3)
+1/det(B3) * adjoint(B3)
+solve(B3)
+B3 %*% solve(B3)
+round(B3 %*% solve(B3), digits = 2)
+solve(B3) %*% B3
+round(solve(B3) %*% B3, digits = 2)
+```
+
+##### (c) $C=(1/10)\begin{bmatrix}-0&-10&0\\-6&0&-8\\8&0&-6\end{bmatrix}$
+
+```{r, 5.3.(c)}
+(C3 <- (1/10)*matrix(c(0, -10, 0, -6, 0, -8, 8, 0, -6), 3))
+minor(C3, 1, 1)
+minor(C3, 2, 1)
+minor(C3, 3, 1)
+minor(C3, 1, 2)
+minor(C3, 2, 2)
+minor(C3, 3, 2)
+minor(C3, 1, 3)
+minor(C3, 2, 3)
+minor(C3, 3, 3)
+cofactor(C3, 1, 1)
+cofactor(C3, 2, 1)
+cofactor(C3, 3, 1)
+cofactor(C3, 1, 2)
+cofactor(C3, 2, 2)
+cofactor(C3, 3, 2)
+cofactor(C3, 1, 3)
+cofactor(C3, 2, 3)
+cofactor(C3, 3, 3)
+C3[1, 1]*cofactor(C3, 1, 1) + C3[2, 1]*cofactor(C3, 2, 1) + C3[3, 1]*cofactor(C3, 3, 1)
+C3[1, 2]*cofactor(C3, 1, 2) + C3[2, 2]*cofactor(C3, 2, 2) + C3[3, 2]*cofactor(C3, 3, 2)
+C3[1, 3]*cofactor(C3, 1, 3) + C3[2, 3]*cofactor(C3, 2, 3) + C3[3, 3]*cofactor(C3, 3, 3)
+det(C3)
+adjoint(C3)
+1/det(C3) * adjoint(C3)
+solve(C3)
+t(C3)
+C3 %*% solve(C3)
+round(C3 %*% solve(C3), digits = 2)
+solve(C3) %*% C3
+```
+
+#### 5.4
+
+##### (a) $\begin{bmatrix}7&3\\8&9\end{bmatrix}$
+
+```{r, 5.4.(a)}
+matrix(c(7, 8, 3, 9), 2)
+det(matrix(c(7, 8, 3, 9), 2))
+adjoint(matrix(c(7, 8, 3, 9), 2))
+solve(matrix(c(7, 8, 3, 9), 2))
+```
+
+##### (b) $\begin{bmatrix}6&31\\8&29\end{bmatrix}$
+
+```{r, 5.4.(b)}
+matrix(c(6, 8, 31, 29), 2)
+det(matrix(c(6, 8, 31, 29), 2))
+adjoint(matrix(c(6, 8, 31, 29), 2))
+solve(matrix(c(6, 8, 31, 29), 2))
+```
+
+##### (c) $\begin{bmatrix}-7&-4\\3&1\end{bmatrix}$
+
+```{r, 5.4.(c)}
+matrix(c(-7, 3, -4, 1), 2)
+det(matrix(c(-7, 3, -4, 1), 2))
+adjoint(matrix(c(-7, 3, -4, 1), 2))
+solve(matrix(c(-7, 3, -4, 1), 2))
+```
+
+##### (d) $\begin{bmatrix}1&5&-5\\3&2&-5\\6&-2&-5\end{bmatrix}$
+
+```{r, 5.4.(d)}
+matrix(c(1, 3, 6, 5, 2, -2, -5, -5, -5), 3)
+det(matrix(c(1, 3, 6, 5, 2, -2, -5, -5, -5), 3))
+adjoint(matrix(c(1, 3, 6, 5, 2, -2, -5, -5, -5), 3))
+solve(matrix(c(1, 3, 6, 5, 2, -2, -5, -5, -5), 3))
+```
+
+##### (e) $\begin{bmatrix}-3&-3&-2\\2&5&3\\-6&-7&-4\end{bmatrix}$
+
+```{r, 5.4.(e)}
+matrix(c(-3, -3, -2, 2, 5, 3, -6, -7, -4), 3)
+det(matrix(c(-3, -3, -2, 2, 5, 3, -6, -7, -4), 3))
+adjoint(matrix(c(-3, -3, -2, 2, 5, 3, -6, -7, -4), 3))
+solve(matrix(c(-3, -3, -2, 2, 5, 3, -6, -7, -4), 3))
+```
+
+##### (f) $\begin{bmatrix}2&-5&1\\1&1&4\\3&0&-2\end{bmatrix}$
+
+```{r, 5.4.(f)}
+matrix(c(2, -5, 1, 1, 1, 4, 3, 0, -2), 3)
+det(matrix(c(2, -5, 1, 1, 1, 4, 3, 0, -2), 3))
+adjoint(matrix(c(2, -5, 1, 1, 1, 4, 3, 0, -2), 3))
+solve(matrix(c(2, -5, 1, 1, 1, 4, 3, 0, -2), 3))
+```
+
+##### (g) $\begin{bmatrix}-1&-2&1\\-2&2&-2\\1&-2&-1\end{bmatrix}$
+
+```{r, 5.4.(g)}
+matrix(c(-1, -2, 1, -2, 2, -2, 1, -2, -1), 3)
+det(matrix(c(-1, -2, 1, -2, 2, -2, 1, -2, -1), 3))
+adjoint(matrix(c(-1, -2, 1, -2, 2, -2, 1, -2, -1), 3))
+solve(matrix(c(-1, -2, 1, -2, 2, -2, 1, -2, -1), 3))
+```
+
+##### (h) $\begin{bmatrix}1&-2&1\\-2&4&-2\\1&-2&1\end{bmatrix}$
+
+```{r, 5.4.(h)}
+# install.packages("Matrix", repos = "https://cran.rstudio.com")
+library(Matrix)
+matrix(c(1, -2, 1, -2, 4, -2, 1, -2, 1), 3)
+det(matrix(c(1, -2, 1, -2, 4, -2, 1, -2, 1), 3))
+adjoint(matrix(c(1, -2, 1, -2, 4, -2, 1, -2, 1), 3))
+# solve(matrix(c(1, -2, 1, -2, 4, -2, 1, -2, 1), 3))
+rankMatrix(matrix(c(1, -2, 1, -2, 4, -2, 1, -2, 1), 3))
+```
+
+##### (i) $\begin{bmatrix}7&4&-1\\4&7&-1\\-4&-4&4\end{bmatrix}$
+
+```{r, 5.4.(i)}
+matrix(c(7, 4, -4, 4, 7, -4, -1, -1, 4), 3)
+det(matrix(c(7, 4, -4, 4, 7, -4, -1, -1, 4), 3))
+adjoint(matrix(c(7, 4, -4, 4, 7, -4, -1, -1, 4), 3))
+solve(matrix(c(7, 4, -4, 4, 7, -4, -1, -1, 4), 3))
+```
+
+
+### 자료 저장
+
+```{r}
+save.image("chapter_5_lab_I.rda")
+```

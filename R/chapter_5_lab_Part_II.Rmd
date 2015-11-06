@@ -1,0 +1,146 @@
+---
+title: "Chapter 5 Lab Part II"
+author: "coop711"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, packages, echo=FALSE}
+library(pander)
+library(knitr)
+```
+
+```{r, adjoint}
+source("adjoint.R")
+ls()
+```
+
+### 5.
+
+#### 5.5   
+
+##### $\begin{bmatrix}0&0&0&3\\0&0&7&0\\0&4&0&0\\5&0&0&0\end{bmatrix}$ 의 역행렬?
+
+```{r, 5.5}
+source("adjoint.R")
+A <- matrix(c(0, 0, 0, 5, 0, 0, 4, 0, 0, 7, 0, 0, 3, 0, 0, 0), 4)
+det(A)
+adjoint(A)
+adjoint(A)/det(A)
+solve(A)
+```
+
+#### 5.6
+
+##### (a) $\begin{bmatrix}1&0&6&8\\0&1&5&4\\0&0&-1&0\\0&0&0&-1\end{bmatrix}$
+
+```{r, 5.6}
+B <- matrix(c(1, 0, 0, 0, 0, 1, 0, 0, 6, 5, -1, 0, 8, 4, 0, -1), 4)
+det(B)
+B %*% B
+adjoint(B)
+solve(B)
+```
+
+##### (b) $\begin{bmatrix}a&b&c\\0&d&e\\0&0&f\end{bmatrix}$
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $\frac{1}{adf}\begin{bmatrix}df&-bf&be-cd\\0&af&-ae\\0&0&ad\end{bmatrix}$
+
+#### 5.7
+
+##### $A=\begin{bmatrix}6&-1&4\\2&5&-3\\1&1&2\end{bmatrix}$
+
+##### (a) $A^t$ 의 역행렬, $A^{-1}$ 의 전치행렬
+
+```{r, 5.7.(a)}
+(A2 <- matrix(c(6, 2, 1, -1, 5, 1, 4, -3, 2), 3))
+t(A2)
+det(A2)
+adjoint(A2)
+adjoint(A2)/det(A2)
+solve(t(A2))
+t(solve(A2))
+```
+
+##### (b) $A^{-1}$ 의 역행렬
+
+```{r, 5.7.(b)}
+solve(solve(A2))
+```
+
+#### 5.8
+
+##### (a) $A\vec{x}=\vec{b}$, $A=\begin{bmatrix}3&4&-2\\-1&-1&3\\1&-7&-1\end{bmatrix}$, $\vec{b}=\begin{bmatrix}4\\6\\-2\end{bmatrix}$.
+
+```{r, 5.8.(a)}
+(A3 <- matrix(c(3, -1, 1, 4, -1, -7, -2, 3, -1), 3))
+(b3 <- c(4, 6, -2))
+det(A3)
+adjoint(A3)
+adjoint(A3)/det(A3)
+(adjoint(A3)/det(A3)) %*% b3
+solve(A3) %*% b3
+solve(A3, b3)
+```
+
+##### (b) $A\vec{x}=\vec{b}$, $A=\begin{bmatrix}3&4&0\\1&0&7\\-2&-3&-8\end{bmatrix}$, $\vec{b}=\begin{bmatrix}2\\-8\\-11\end{bmatrix}$.
+
+```{r, 5.8.(b)}
+(A4 <- matrix(c(-3, 1, -2, 4, 0, -3, 0, 7, -8), 3))
+(b4 <- c(2, -8, -11))
+det(A4)
+adjoint(A4)
+adjoint(A4)/det(A4)
+(adjoint(A4)/det(A4)) %*% b4
+solve(A4) %*% b4
+solve(A4, b4)
+```
+
+##### (c) $A\vec{x}=\vec{b}$, $A=\begin{bmatrix}2&0&8&-1\\0&8&0&-3\\0&0&4&\frac{3}{2}\\0&0&0&\frac{3}{8}\end{bmatrix}$, $\vec{b}=\begin{bmatrix}0\\-4\\42\\7\frac{1}{2}\end{bmatrix}$.
+
+```{r, 5.8.(c)}
+(A5 <- matrix(c(2, 0, 0, 0, 0, 8, 0, 0, 8, 0, 4, 0, -1, -3, 3/2, 3/8), 4))
+(b5 <- c(0, -4, 42, 7.5))
+det(A5)
+adjoint(A5)
+adjoint(A5)/det(A5)
+(adjoint(A5)/det(A5)) %*% b5
+solve(A5) %*% b5
+solve(A5, b5)
+```
+
+##### (d) $A\vec{x}=\vec{b}$, $A=\begin{bmatrix}1&3&-1\\4&-1&2\\5&2&1\end{bmatrix}$, $\vec{b}=\begin{bmatrix}7\\8\frac{1}{2}\\10\end{bmatrix}$.
+
+```{r, 5.8.(d)}
+(A6 <- matrix(c(1, 4, 5, 3, -1, 2, -1, 2, 1), 3))
+(b6 <- c(7, 8.5, 10))
+det(A6)
+# adjoint(A6)
+# adjoint(A6) %*% matrix(b6, ncol = 1)
+# adjoint(A6) %*% matrix(b6, ncol = 1)/det(A6)
+# solve(A6) %*% matrix(b6, ncol = 1)
+# solve(A6, b6)
+```
+
+#### 5.9
+
+```{r, 5.9}
+(A7 <- matrix(c(1, 2, 0, -4, 7, 1, 1, 0, 0), 3))
+det(A7)
+adjoint(A7)
+solve(A7)
+(A8 <- matrix(c(1/2, 1/4, 4, 1/4, 1/8, 0, 1/8, 0, 1), 3))
+det(A8)
+adjoint(A8)
+solve(A8)
+(A9 <- matrix(c(1, 0, 1, 1, 1, 0, 0, 1, 1), 3))
+det(A9)
+adjoint(A9)
+solve(A9)
+```
+
+### 자료 저장
+
+```{r}
+save.image("chapter_5_lab_II.rda")
+```

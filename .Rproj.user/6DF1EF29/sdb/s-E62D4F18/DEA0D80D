@@ -1,0 +1,19 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"Chapter 5 Class Part II\"\nauthor: \"coop711\"\ndate: \"`r Sys.Date()`\"\noutput: html_document\n---\n\n```{r, echo=FALSE}\nlibrary(pander)\nlibrary(knitr)\n```\n\n\n## 5.5 역행렬을 이용한 대수적 단순화\n\n##### (a) 행렬에 의한 나눗셈은 존재하지 않음.\n\n* $A\\ X=B$ 에서  $A^{-1}$ 이 존재하면 양변 좌측에 각각 $A^{-1}$ 를 곱해서 $A^{-1}A\\ X=A^{-1}B$, 즉, $X=A^{-1}B$가 성립함. 그러나 우측에 곱했을 때는 다른 결과가 나오게 됨.\n\n##### (b) $P\\ K=Q\\ K$라고 해서 $P=Q$가 되는 것은 아님.\n\n* $\\begin{bmatrix}7&5&4\\\\3&3&10\\end{bmatrix}\\begin{bmatrix}1&2&2\\\\-1&0&1\\\\0&2&3\\end{bmatrix}=\\begin{bmatrix}2&22&31\\\\0&26&39\\end{bmatrix}=\\begin{bmatrix}3&1&8\\\\2&2&11\\end{bmatrix}\\begin{bmatrix}1&2&2\\\\-1&0&1\\\\0&2&3\\end{bmatrix}$\n\n```{r, example}\nmatrix(c(7, 3, 5, 3, 4, 10), 2)\nmatrix(c(1, -1, 0, 2, 0, 2, 2, 1, 3), 3)\nmatrix(c(7, 3, 5, 3, 4, 10), 2) %*% matrix(c(1, -1, 0, 2, 0, 2, 2, 1, 3), 3)\nmatrix(c(3, 2, 1, 2, 8, 11), 2)\nmatrix(c(1, -1, 0, 2, 0, 2, 2, 1, 3), 3)\nmatrix(c(3, 2, 1, 2, 8, 11), 2) %*% matrix(c(1, -1, 0, 2, 0, 2, 2, 1, 3), 3)\ndet(matrix(c(1, -1, 0, 2, 0, 2, 2, 1, 3), 3))\n```\n\n* $K$ 가 역행렬을 가지면, 양변 우측에 $K^{-1}$ 을 곱하여 $P\\ K\\ K^{-1}=Q\\ K\\ K^{-1}$, 즉 $P=Q$.\n\n##### (c) $R+R\\ S\\ T=R(I+S\\ T)$ \n\n* 만일, $T^{-1}$ 이 존재하면, $R+R\\ S\\ T=R(I+S\\ T)=R(T^{-1}T+S\\ T)=R(T^{-1}+S)T$.\n\n##### (d) $x\\ne1$ 일 때, $1+x+x^2+\\cdots+x^{n-1}=(x^n-1)/(x-1)$. 이와 비교되는 행렬대수는?\n\n* $(X-I)^{-1}$ 이 존재하면, $I+X+X^2+\\cdots+X^{n-1}=(X^n-I)(X-I)^{-1}$. 또한 $I+X+X^2+\\cdots+X^{n-1}=(X-I)^{-1}(X^n-I)$\n\n##### 예제 5.5 $(I+M^{-1})^{-1}=M(M+I)^{-1}$\n\n* 먼저 $(I+M^{-1})M(M+I)^{-1}=I$ 를 보이자.\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(I+M^{-1})M(M+I)^{-1}=(M+M^{-1}M)(M+I)^{-1}=(M+I)(M+I)^{-1}=I$. \n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;양변 좌측에 $(I+M^{-1})^{-1}$ 을 곱하면,\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(I+M^{-1})^{-1}(I+M^{-1})M(M+I)^{-1}=(I+M^{-1})^{-1}$. \n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이것을 간단히 하면,\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$M(M+I)^{-1}=(I+M^{-1})^{-1}$.  \n\n#### 5.6 역행렬을 이용한 연립방정식의 해\n\n* $A\\vec{x}=\\vec{b}$ 에서 $A^{-1}$ 이 존재하면 양변 좌측에 $A^{-1}$ 을 곱하여 $\\vec{x}=A^{-1}\\vec{b}$를 얻는다.\n\n##### 예제 5.6 $A\\vec{x}=\\vec{b}$. 단, $A=\\begin{bmatrix}2&-2&-1\\\\1&1&-2\\\\1&0&-1\\end{bmatrix}$, $\\vec{b}=\\begin{bmatrix}5\\\\1\\\\4\\end{bmatrix}$. \n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$A^{-1}=\\begin{bmatrix}-1&-2&5\\\\-1&-1&3\\\\-1&-2&4\\end{bmatrix}$. \n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 따라서, 연립방정식의 해는\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$\\vec{x}=A^{-1}\\vec{b}=\\begin{bmatrix}-1&-2&5\\\\-1&-1&3\\\\-1&-2&4\\end{bmatrix}\\begin{bmatrix}5\\\\1\\\\4\\end{bmatrix}=\\begin{bmatrix}13\\\\6\\\\9\\end{bmatrix}$\n\n```{r, solve}\nsource(\"adjoint.R\")\nA <- matrix(c(2, 1, 1, -2, 1, 0, -1, -2, -1), 3)\nb <- c(5, 1, 4)\nminor(A, 1, 1)\nminor(A, 2, 1)\nminor(A, 3, 1)\nminor(A, 1, 2)\nminor(A, 2, 2)\nminor(A, 3, 2)\nminor(A, 1, 3)\nminor(A, 2, 3)\nminor(A, 3, 3)\ncofactor(A, 1, 1)\ncofactor(A, 2, 1)\ncofactor(A, 3, 1)\ncofactor(A, 1, 2)\ncofactor(A, 2, 2)\ncofactor(A, 3, 2)\ncofactor(A, 1, 3)\ncofactor(A, 2, 3)\ncofactor(A, 3, 3)\nadjoint(A)\ndet(A)\nsolve(A)\nsolve(A) %*% b\nsolve(A, b)\n```\n\n### 자료 저장\n\n```{r}\nsave.image(\"chapter_5_class_II.rda\")\n```",
+    "created" : 1445827406467.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2851115262",
+    "id" : "DEA0D80D",
+    "lastKnownWriteTime" : 1446779173,
+    "path" : "~/Desktop/Works/Class/Math_Foundations/R/chapter_5_class_Part_II.Rmd",
+    "project_path" : "R/chapter_5_class_Part_II.Rmd",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
