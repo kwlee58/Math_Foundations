@@ -1,0 +1,31 @@
+---
+title: "Chapter 3 lab"
+author: "coop711"
+date: "2015년 9월 28일"
+output: html_document
+---
+
+## 5. 
+
+* 교재 28쪽의 i)과 ii)를 이용하여 다음을 보인다.
+
+Q 1. $X^tX = X,\mbox{ => }X = X^t = X^2$.
+
+A 1. 
+\[
+\begin{aligned}
+(X-X^2)^t(X-X^2) &= X^tX-(XX)^tX - X^tX^2 + (XX)^t(XX)\\
+      &=X^tX-X^tX^tX-X^tXX + X^tX^tXX\\
+      &=X^tX-X^tX-XX + XX =0\\
+\end{aligned}
+\]
+
+2. 
+
+$(X-X^t)^t(X-X^t) = X^tX-(X^t)^tX - X^tX^t + (X^t)^t(X^t)$
+
+$=X^tX-XX-X^tX^t + XX^t$
+
+$=X-XX-(XX)^t+(X^tX)^t =0$
+
+Q 2. $X^tX = X^2,\mbox{ => }\rm{tr}[(X-x^t)^t(X-X^t)] = 0,\mbox{ } X = X^t$.
