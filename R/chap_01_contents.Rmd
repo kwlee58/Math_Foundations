@@ -1,5 +1,5 @@
 ---
-title: "Chapter_1_class"
+title: "Chapter 1 class"
 author: "coop711"
 date: "2015년 9월 5일"
 output: html_document
