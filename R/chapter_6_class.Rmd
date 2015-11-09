@@ -1,0 +1,94 @@
+---
+title: "Chapter 6 Clas"
+author: "coop711"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, echo=FALSE}
+library(pander)
+library(knitr)
+```
+
+
+## 6.1 벡터 공간과 부분 공간
+
+##### 정의 6.1 $R^n$ 상의 두 벡터 $\vec{x}=(x_1,x_2,\ldots,x_n)$, $\vec{y}=(y_1,y_2,\ldots,y_n)$ 의 dot product 는 $\vec{x}\cdot\vec{y}=\sum_{i=1}^nx_iy_i=x_1y_1+x_2y_2+\cdots+x_ny_n$
+
+## 6.2 선형독립과 선형종속
+
+##### 정의 6.3 $\vec{x_1},\vec{x_2},\ldots,\vec{x_n}$이 벡터공간 $V$의 벡터들이라 하고, $a_1, a_2, \ldots, a_n$이 스칼라일 때, $a_1\vec{x_1}+a_2\vec{x_2}+\cdots+a_n\vec{x_n}$ 형태의 합을 $\vec{x_1},\vec{x_2},\ldots,\vec{x_n}$의 선형결합(linear combination)이라 한다.
+
+##### 예제 6.1 벡터공간 $R^3$ 의 임의의 벡터가 다음과 같이 주어질 때, $\vec{x}$ 가 $\vec{x_1}, \vec{x_2}, \vec{x_3}$의 선형결합인지 조사.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$\vec{x_1}=\begin{bmatrix}1\\-1\\1\end{bmatrix}$, $\vec{x_2}=\begin{bmatrix}1\\0\\2\end{bmatrix}$, $\vec{x_3}=\begin{bmatrix}-1\\1\\3\end{bmatrix}$, $\vec{x}=\begin{bmatrix}2\\1\\-1\end{bmatrix}$.
+
+##### 풀이. $a_1\vec{x_1}+a_2\vec{x_2}+a_3\vec{x_3}=\vec{x}$ 가 성립하는 스칼라 $a_1, a_2, a_3$ 파악.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$a_1\begin{bmatrix}1\\-1\\1\end{bmatrix}+a_2\begin{bmatrix}1\\0\\2\end{bmatrix}+a_3\begin{bmatrix}-1\\1\\3\end{bmatrix}=\begin{bmatrix}2\\1\\-1\end{bmatrix}$
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$\begin{bmatrix}1&1&-1\\-1&0&1\\1&2&3\end{bmatrix}\begin{bmatrix}a_1\\a_2\\a_3\end{bmatrix}=\begin{bmatrix}2\\2\\-1\end{bmatrix}$
+
+```{r, 6.1}
+source("./adjoint.R")
+(A1 <- matrix(c(1, -1, 1, 1, 0, 2, -1, 1, 3), 3)) 
+(b1 <- c(2, 1, -1))
+det(A1)
+adjoint(A1)
+adjoint(A1)/det(A1)
+(adjoint(A1)/det(A1)) %*% b1
+solve(A1, b1)
+```
+
+##### 정의 6.4 벡터공간 $V$ 에서 어떤 벡터들의 집합 $S=\{\vec{x_1},\vec{x_2},\ldots,\vec{x_n}\}$ 이 있어서 $a_1\vec{x_1}+a_2\vec{x_2}+\cdots+a_n\vec{x_n}=0$ 을 만족하는 적어도 하나는 0이 아닌 스칼라 $a_1,a_2,\ldots,a_n$이 존재할 때, $S$ 는 선형종속(linearly dependent). 선형종속이 아니면 선형독립(linearly independent)
+
+##### 예제 6.2 $R^3$의 세 벡터, $\vec{x_1}=\begin{bmatrix}1\\-1\\1\end{bmatrix}$, $\vec{x_2}=\begin{bmatrix}1\\0\\2\end{bmatrix}$, $\vec{x_3}=\begin{bmatrix}-1\\1\\3\end{bmatrix}$ 가 선형독립인지 파악.
+
+##### 풀이. $a_1\vec{x_1}+a_2\vec{x_2}+a_3\vec{x_3}=\vec{0}$ 가 성립하는 경우가 $a_1, a_2, a_3$가 모두 0인 경우임을 보여주면 선형 독립.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$a_1\begin{bmatrix}1\\-1\\1\end{bmatrix}+a_2\begin{bmatrix}1\\0\\2\end{bmatrix}+a_3\begin{bmatrix}-1\\1\\3\end{bmatrix}=\begin{bmatrix}0\\0\\0\end{bmatrix}$
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$\begin{bmatrix}1&1&-1\\-1&0&1\\1&2&3\end{bmatrix}\begin{bmatrix}a_1\\a_2\\a_3\end{bmatrix}=\begin{bmatrix}0\\0\\0\end{bmatrix}$ 을 풀면, 예제 6.1로부터 행렬 $\begin{bmatrix}1&1&-1\\-1&0&1\\1&2&3\end{bmatrix}$ 의 역행렬이 존재함을 알기 때문에 $a_1=a_2=a_3=0$ 임을 알 수 있음. 따라서 $\{\vec{x_1},\vec{x_2},\vec{x_3}\}$ 는 선형독립.
+
+##### 예제 6.3 $R^3$의 세 벡터, $\vec{x_1}=\begin{bmatrix}1\\-1\\1\end{bmatrix}$, $\vec{x_2}=\begin{bmatrix}1\\0\\2\end{bmatrix}$, $\vec{x_3}=\begin{bmatrix}3\\-2\\4\end{bmatrix}$ 가 선형독립인지 파악.
+
+##### 풀이. 쉽게 $2\vec{x_1}+\vec{x_2}=\vec{x_3}$
+
+```{r, 6.3}
+(A2 <- matrix(c(1, -1, 1, 1, 0, 2, 3, -2, 4), 3))
+det(A2)
+2*A2[, 1] + A2[, 2]
+A2[, 3]
+```
+
+## 6.3 벡터 공간의 기저
+
+##### 예제 6.4 벡터공간 $R^3$ 의 세 벡터가 예제 6.2의 $\vec{x_1},\vec{x_2},\vec{x_3}$ 일 때 이들 벡터가 $R^3$ 를 생성하는가?
+
+##### 풀이. $R^3$ 의 모든 벡터가 $\{\vec{x_1},\vec{x_2},\vec{x_3}\}$ 의 선형결합으로 표시될 수 있으면 되므로, 임의의 벡터 $\vec{x}=\begin{bmatrix}a\\b\\c\end{bmatrix}$ 에 대하여 성립함을 보여 줌.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$\begin{bmatrix}1&1&-1\\-1&0&1\\1&2&3\end{bmatrix}\begin{bmatrix}a_1\\a_2\\a_3\end{bmatrix}=\begin{bmatrix}a\\b\\c\end{bmatrix}$ 을 풀면
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$\begin{bmatrix}a_1\\a_2\\a_3\end{bmatrix}=\begin{bmatrix}1&1&-1\\-1&0&1\\1&2&3\end{bmatrix}^{-1}\begin{bmatrix}a\\b\\c\end{bmatrix}=1/4\begin{bmatrix}-2&-5&1\\4&4&0\\-2&-1&1\end{bmatrix}\begin{bmatrix}a\\b\\c\end{bmatrix}=\begin{bmatrix}-\frac{1}{2}a-\frac{5}{4}b+\frac{1}{4}c\\a+b\\-\frac{1}{2}a-\frac{1}{4}b+\frac{1}{4}c\end{bmatrix}$
+
+##### 정의 6.6. $V$ 가 벡터공간이고 $S$ 가 $V$ 의 벡터들의 유한한 집합일 때 $S$ 가 선형독립이고 $V$를 생성하면,  $S$ 는 $V$ 의 기저 
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$A=\begin{bmatrix}\vec{r_1}\\\vec{r_2}\\\vdots\\\vec{r_n}\end{bmatrix}=\begin{bmatrix}\vec{c_1}&\vec{c_2}&\cdots&\vec{c_n}\end{bmatrix}$ 로부터 생성되는 행공간(row space)과 열공간(column space)의 정의 숙지.
+
+## 6.4 내적 공간
+
+##### 정리 6.6. Cauchy-Schwarz Inequality
+
+##### 증명. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$\vec{x}^*=\vec{x}/||\vec{x}||$, $\vec{y}^*=\vec{x}/||\vec{x}||$, $r=<\vec{x}^*,\vec{y}^*>$ 라 하면 $|\,r\,|\le1$ 을 보이는 문제. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$<\vec{x}^*-r\vec{y}^*,\vec{y}^*>=0$ 임을 이용하여
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$1=||\vec{x}^*||^2=||\vec{x}^*-r\vec{y}^*+r\vec{y}^*||^2=||\vec{x}^*-r\vec{y}^*||^2+r^2||\vec{y}^*||^2\ge r^2$.
+
+### 자료 저장
+
+```{r}
+save.image("chapter_6_class.rda")
+```
