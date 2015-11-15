@@ -1,0 +1,56 @@
+---
+title: "Chapter 7 Class"
+author: "coop711"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, echo=FALSE}
+library(pander)
+library(knitr)
+```
+
+
+## 7.1 선형변환(linear transformation)
+
+##### 예제 7.1 다음 세 개 벡터를 고려하자.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$\vec{x_1}=\begin{bmatrix}1\\0\\-1\\6\end{bmatrix}$, $\vec{x_2}=\begin{bmatrix}-2\\11\\3\\5\end{bmatrix}$, $\vec{x_3}=\begin{bmatrix}-0\\1\\2\\7\end{bmatrix}$. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$2\vec{x_1}+3\vec{x_2}-4\vec{x_3}=2\begin{bmatrix}1\\0\\-1\\6\end{bmatrix}+3\begin{bmatrix}-2\\11\\3\\5\end{bmatrix}-4\begin{bmatrix}0\\1\\2\\7\end{bmatrix}=\begin{bmatrix}\vec{x_1}&\vec{x_2}&\vec{x_3}\end{bmatrix}\begin{bmatrix}2\\3\\-4\end{bmatrix}=X\vec{a}$, 여기서
+$X=\begin{bmatrix}\vec{x_1}&\vec{x_2}&\vec{x_3}\end{bmatrix}$, $\vec{a}=\begin{bmatrix}2\\3\\-4\end{bmatrix}$.
+
+* 선형변환 $\vec{b}=X\vec{a}$, 여기서 $\vec{b}=\begin{bmatrix}b_1\\b_2\\b_3\end{bmatrix}$, $X=\begin{bmatrix}x_{11}&x_{12}&x_{13}\\x_{21}&x_{22}&x_{23}\\x_{31}&x_{32}&x_{33}\end{bmatrix}$,
+$\vec{a}=\begin{bmatrix}a_1\\a_2\\a_3\end{bmatrix}$. $X\vec{a}=\begin{bmatrix}\vec{x_1}&\vec{x_2}&\vec{x_3}\end{bmatrix}\begin{bmatrix}a_1\\a_2\\a_3\end{bmatrix}=a_1\vec{x_1}+a_2\vec{x_2}+a_3\vec{x_3}$. 단, $\vec{x_1}, \vec{x_2}, \vec{x_3}$는 $X$ 의 열 벡터. 한편, $\vec{b}^t=\vec{a}^tX^t=\begin{bmatrix}a_1&a_2&a_3\end{bmatrix}\begin{bmatrix}\vec{x_1}^t\\\vec{x_2}^t\\\vec{x_3}^t\end{bmatrix}=a_1\vec{x_1}^t+a_2\vec{x_2}^t+a_3\vec{x_3}^t$.
+
+## 7.2 선형종속인 벡터
+
+##### 예제 7.2. 다음 벡터들을 생각해 보자.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$\vec{x_1}=\begin{bmatrix}3\\-6\\9\end{bmatrix}$, $\vec{x_2}=\begin{bmatrix}0\\5\\-5\end{bmatrix}$, $\vec{x_3}=\begin{bmatrix}2\\1\\1\end{bmatrix}$,
+$\vec{x_4}=\begin{bmatrix}-6\\12\\-18\end{bmatrix}$, $\vec{x_5}=\begin{bmatrix}2\\-3\\3\end{bmatrix}$
+
+##### (2.1)  $2\vec{x_1}+\vec{x_4}=\vec{0}$
+##### (2.2)  $2\vec{x_1}+3\vec{x_2}-3\vec{x_3}=\vec{0}$
+##### (2.3)  $a_1\vec{x_1}+a_2\vec{x_2}=\vec{0}$ 은 $a_1=a_2=0$일 때만 성립
+
+```{r, 7.3}
+(x1 <- c(3, -6, 9))
+(x2 <- c(0, 5, -5))
+(x3 <- c(2, 1, 1))
+(x4 <- c(-6, 12, -18))
+(x5 <- c(2, -3, 3))
+(X123 <- cbind(x1, x2, x3))
+det(X123)
+round(det(X123), digits=2)
+(X125<-cbind(x1, x2, x5))
+det(X125)
+```
+
+
+
+### 자료 저장
+
+```{r}
+save.image("chapter_7_class.rda")
+```
