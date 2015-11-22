@@ -10,7 +10,7 @@
 
 <meta name="author" content="coop711" />
 
-<meta name="date" content="2015-11-15" />
+<meta name="date" content="2015-11-21" />
 
 <title>Chapter 6 Lab</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Chapter 6 Lab</h1>
 <h4 class="author"><em>coop711</em></h4>
-<h4 class="date"><em>2015-11-15</em></h4>
+<h4 class="date"><em>2015-11-21</em></h4>
 </div>
 
 
@@ -413,8 +413,8 @@ det(X8)</code></pre>
 <pre class="r"><code>det(X11)</code></pre>
 <pre><code>## [1] 39</code></pre>
 </div>
-<div id="c-a_1beginbmatrix60-1endbmatrixa_2beginbmatrix114endbmatrixvec0---a_1a_20--." class="section level5">
-<h5>(c) <span class="math inline">\(a_1\begin{bmatrix}6\\0\\-1\end{bmatrix}+a_2\begin{bmatrix}1\\1\\4\end{bmatrix}=\vec{0}\)</span> 을 만족시키는 <span class="math inline">\(a_1=a_2=0\)</span> 임을 보인다.</h5>
+<div id="c-a_1beginbmatrix60-1endbmatrixa_2beginbmatrix114endbmatrixvec0---a_1a_20-------.---------a_1a_20--.------2times2-------vec0---a_1a_20----." class="section level5">
+<h5>(c) <span class="math inline">\(a_1\begin{bmatrix}6\\0\\-1\end{bmatrix}+a_2\begin{bmatrix}1\\1\\4\end{bmatrix}=\vec{0}\)</span> 을 만족시키는 <span class="math inline">\(a_1=a_2=0\)</span> 임을 보이면 나머지 한 식은 당연히 만족된다. 미지수는 두개이고, 식은 세 개이므로 두 개를 풀어서 <span class="math inline">\(a_1=a_2=0\)</span> 임을 보인다. 어느 두 식을 풀기 위하여 <span class="math inline">\(2\times2\)</span> 행렬을 만들어도 행렬식이 존재하므로 역행렬을 만들어 <span class="math inline">\(\vec{0}\)</span> 벡터와 곱해주면 <span class="math inline">\(a_1=a_2=0\)</span>이기 때문에 두 벡터는 선형독립이다.</h5>
 <pre class="r"><code>(u10 &lt;- c(6, 0, -1))</code></pre>
 <pre><code>## [1]  6  0 -1</code></pre>
 <pre class="r"><code>(v10 &lt;- c(1, 1, 4))</code></pre>
@@ -424,15 +424,41 @@ det(X8)</code></pre>
 ## [1,]   6   1
 ## [2,]   0   1
 ## [3,]  -1   4</code></pre>
+<p>위의 R 코드는 <span class="math inline">\(\vec{u}=\begin{bmatrix}6\\0\\-1\end{bmatrix}, \vec{v}=\begin{bmatrix}1\\1\\4\end{bmatrix}\)</span>, <span class="math inline">\(X=\begin{bmatrix}\vec{u}&amp;\vec{v}\end{bmatrix}\)</span> 라고 설정하는 과정이다. 여기서 <span class="math inline">\(\vec{a}=\begin{bmatrix}a_1\\a_2\end{bmatrix}\)</span> 했을 때, <span class="math inline">\(a_1\begin{bmatrix}6\\0\\-1\end{bmatrix}+a_2\begin{bmatrix}1\\1\\4\end{bmatrix}=X\vec{a}\)</span>이므로, <span class="math inline">\(X\vec{a}=\vec{0}\)</span>의 해가 <span class="math inline">\(\vec{a}=\vec{0}\)</span>임을 보이면 된다. 이를 위하여 <span class="math inline">\(X\)</span>의 어느 <span class="math inline">\(2\times2\)</span> 서브매트릭스, <span class="math inline">\(X_{2\times2}\)</span>라 하자, 를 택하더라도 역행렬이 존재하여 <span class="math inline">\(\vec{a}=X_{2\times2}^{-1}\vec{0}=\vec{0}\)</span> 이고, 이 <span class="math inline">\(\vec{a}=0\)</span>은 나머지 한 식도 만족시키기 때문에 결국 <span class="math inline">\(\vec{a}=0\)</span>이고, <span class="math inline">\(\vec{u}\)</span>와 <span class="math inline">\(\vec{v}\)</span>는 선형독립이다.</p>
 <pre class="r"><code>det(X12[1:2, ])</code></pre>
 <pre><code>## [1] 6</code></pre>
+<pre class="r"><code>adjoint(X12[1:2, ])</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    1   -1
+## [2,]    0    6</code></pre>
+<pre class="r"><code>solve(X12[1:2, ])</code></pre>
+<pre><code>##          [,1]       [,2]
+## u10 0.1666667 -0.1666667
+## v10 0.0000000  1.0000000</code></pre>
 <pre class="r"><code>det(X12[c(1, 3), ])</code></pre>
 <pre><code>## [1] 25</code></pre>
+<pre class="r"><code>adjoint(X12[c(1, 3), ])</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    4   -1
+## [2,]    1    6</code></pre>
+<pre class="r"><code>solve(X12[c(1, 3), ])</code></pre>
+<pre><code>##     [,1]  [,2]
+## u10 0.16 -0.04
+## v10 0.04  0.24</code></pre>
 <pre class="r"><code>det(X12[2:3, ])</code></pre>
 <pre><code>## [1] 1</code></pre>
+<pre class="r"><code>adjoint(X12[2:3, ])</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    4   -1
+## [2,]    1    0</code></pre>
+<pre class="r"><code>solve(X12[2:3, ])</code></pre>
+<pre><code>##     [,1] [,2]
+## u10    4   -1
+## v10    1    0</code></pre>
 </div>
-<div id="d" class="section level5">
-<h5>(d)</h5>
+<div id="d-c------------------.-----------------." class="section level5">
+<h5>(d) (c)와는 달리 이번에는 차원에 비하여 벡터가 하나 더 많으므로 반드시 하나 이상의 벡터가 다른 벡터들의 선형결합으로 나타나게 되어 있다. 따라서, 네 개의 벡터 중 세 개로 행렬을 구성하고, 그 벡터들의 선형결합으로 나머지 벡터가 표현되는지 파악하면 된다.</h5>
+<p>      <span class="math inline">\(\vec{u}=\begin{bmatrix}1\\3\\3\end{bmatrix}, \vec{v}=\begin{bmatrix}0\\1\\4\end{bmatrix},\vec{w}=\begin{bmatrix}5\\6\\3\end{bmatrix},\vec{t}=\begin{bmatrix}7\\2\\-1\end{bmatrix}\)</span>, <span class="math inline">\(X=\begin{bmatrix}\vec{u}&amp;\vec{v}&amp;\vec{w}&amp;\vec{t}\end{bmatrix}\)</span> 라 하고, <span class="math inline">\(\vec{a}=\begin{bmatrix}a_1\\a_2\\a_3\end{bmatrix}\)</span> 라 하여 <span class="math inline">\(a_1\vec{u}+a_2\vec{v}+a_3\vec{w}=\vec{t}\)</span>, 즉 <span class="math inline">\(X_{[,1:3]}\vec{a}=\vec{t}\)</span> 등을 풀어보면 된다. (단, <span class="math inline">\(X_{[,1:3]}\)</span> 는 <span class="math inline">\(X\)</span>의 1, 2, 3번째 열로 구성된 행렬)</p>
 <pre class="r"><code>(u11 &lt;- c(1, 3, 3))</code></pre>
 <pre><code>## [1] 1 3 3</code></pre>
 <pre class="r"><code>(v11 &lt;- c(0, 1, 4))</code></pre>
@@ -446,16 +472,21 @@ det(X8)</code></pre>
 ## [1,]   1   0   5   7
 ## [2,]   3   1   6   2
 ## [3,]   3   4   3  -1</code></pre>
+<p>위의 코드는 <span class="math inline">\(\vec{u},\vec{v},\vec{w},\vec{t}\)</span> 와 행렬 <span class="math inline">\(X=\begin{bmatrix}\vec{u}&amp;\vec{v}&amp;\vec{w}&amp;\vec{t}\end{bmatrix}\)</span> 를 설정하는 과정.</p>
 <pre class="r"><code>det(X13[, 1:3])</code></pre>
 <pre><code>## [1] 24</code></pre>
+<p><span class="math inline">\(X_{[,1:3]}\)</span>의 행렬식이 0이 아니므로, 역행렬이 존재하고 <span class="math inline">\(X_{[,1:3]}\vec{a}=\vec{t}\)</span> 의 해가 존재한다. 다음은, 이 해를 구하는 과정.</p>
 <pre class="r"><code>solve(X13[, 1:3], t11)</code></pre>
 <pre><code>##   u11   v11   w11 
 ## -4.25  1.25  2.25</code></pre>
+<p>소숫점의 정체를 파악하기 위하여 행렬식을 곱해보면,</p>
 <pre class="r"><code>solve(X13[, 1:3], t11)*det(X13[, 1:3])</code></pre>
 <pre><code>##  u11  v11  w11 
 ## -102   30   54</code></pre>
+<p>위에서 구한 <span class="math inline">\(\vec{a}\)</span> 의 원소들이 <span class="math inline">\(a_1\vec{u}+a_2\vec{v}+a_3\vec{w}=\vec{t}\)</span> 를 만족하는지 살펴보자.</p>
 <pre class="r"><code>solve(X13[, 1:3], t11)[1]*u11 + solve(X13[, 1:3], t11)[2]*v11 + solve(X13[, 1:3], t11)[3]*w11</code></pre>
 <pre><code>## [1]  7  2 -1</code></pre>
+<p>위의 계산 결과로부터 <span class="math inline">\(\vec{u}, \vec{v}, \vec{w}\)</span>는 선형독립이고, <span class="math inline">\(\vec{t}=\frac{-102}{24}\vec{u}+\frac{30}{24}\vec{v}+\frac{54}{24}\vec{w}=-\frac{17}{4}\vec{u}+\frac{5}{4}\vec{v}+\frac{9}{4}\vec{w}\)</span> 의 선형결합으로 나타난다는 것을 알 수 있다.</p>
 <pre class="r"><code>det(X13[, c(1, 2, 4)])</code></pre>
 <pre><code>## [1] 54</code></pre>
 <pre class="r"><code>solve(X13[, c(1, 2, 4)], w11)</code></pre>
@@ -466,6 +497,7 @@ det(X8)</code></pre>
 ## 102 -30  24</code></pre>
 <pre class="r"><code>solve(X13[, c(1, 2, 4)], w11)[1]*u11 + solve(X13[, c(1, 2, 4)], w11)[2]*v11 + solve(X13[, c(1, 2, 4)], w11)[3]*t11</code></pre>
 <pre><code>## [1] 5 6 3</code></pre>
+<p>      <span class="math inline">\(\vec{w}=\frac{102}{54}\vec{u}+\frac{-30}{54}\vec{v}+\frac{24}{54}\vec{t}=\frac{17}{9}\vec{u}-\frac{5}{9}\vec{v}+\frac{4}{9}\vec{t}\)</span></p>
 <pre class="r"><code>det(X13[, c(1, 3, 4)])</code></pre>
 <pre><code>## [1] -30</code></pre>
 <pre class="r"><code>solve(X13[, c(1, 3, 4)], v11)</code></pre>
@@ -478,6 +510,7 @@ det(X8)</code></pre>
 <pre><code>## [1] 8.881784e-16 1.000000e+00 4.000000e+00</code></pre>
 <pre class="r"><code>round(solve(X13[, c(1, 3, 4)], v11)[1]*u11 + solve(X13[, c(1, 3, 4)], v11)[2]*w11 + solve(X13[, c(1, 3, 4)], v11)[3]*t11, digits = 2)</code></pre>
 <pre><code>## [1] 0 1 4</code></pre>
+<p>      <span class="math inline">\(\vec{v}=\frac{-102}{-30}\vec{u}+\frac{54}{-30}\vec{w}+\frac{-24}{-30}\vec{t}\frac{17}{5}\vec{u}-\frac{9}{5}\vec{w}+\frac{4}{5}\vec{t}\)</span></p>
 <pre class="r"><code>det(X13[, 2:4])</code></pre>
 <pre><code>## [1] -102</code></pre>
 <pre class="r"><code>solve(X13[, 2:4], u11)</code></pre>
@@ -488,6 +521,7 @@ det(X8)</code></pre>
 ## -30 -54  24</code></pre>
 <pre class="r"><code>solve(X13[, 2:4], u11)[1]*v11 + solve(X13[, 2:4], u11)[2]*w11 + solve(X13[, 2:4], u11)[3]*t11</code></pre>
 <pre><code>## [1] 1 3 3</code></pre>
+<p>      <span class="math inline">\(\vec{u}=\frac{-30}{-102}\vec{v}+\frac{-54}{-102}\vec{w}-\frac{24}{-102}\vec{t}=\frac{10}{51}\vec{v}+\frac{9}{17}\vec{w}-\frac{4}{17}\vec{t}\)</span></p>
 </div>
 </div>
 <div id="section-3" class="section level4">
