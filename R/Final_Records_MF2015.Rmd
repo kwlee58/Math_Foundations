@@ -1,0 +1,31 @@
+---
+title: "통계수리적기초 최종"
+author : "금융정보통계학과 이기원 교수"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<!--## Lab Assignment-->
+
+```{r Total Scores, echo=FALSE, message=FALSE, results='hide'}
+options(digits=3)
+library(xlsx)
+library(knitr)
+library(pander)
+panderOptions("table.split.table", Inf)
+total <- read.xlsx(file = "~/Desktop/Works/Class/Math_Foundations/data/scoreList2015v2.xlsx", sheetIndex = 1, rowIndex = 3:30, colIndex = 2:8, colClasses = c(rep("character", 2), rep("numeric", 5)), header = TRUE)
+total <- total[c(2, 1, 4:7, 3)]
+v.names.total <- c("ID", "Name", "Midterm", "Final", "Lab", "Offline", "Total")
+names(total) <- v.names.total
+kable(total)
+N <- nrow(total)
+total$Ranks <- N + 1 - rank(total$Total)
+total$Grades <- ifelse(total$Ranks <= floor(N*0.4), "A+", ifelse(total$Ranks <= floor(N*0.7), "B+", "C+"))
+```
+
+```{r Final Results, echo=FALSE}
+kable(total)
+```
