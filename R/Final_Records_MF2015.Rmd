@@ -16,7 +16,7 @@ library(xlsx)
 library(knitr)
 library(pander)
 panderOptions("table.split.table", Inf)
-total <- read.xlsx(file = "~/Desktop/Works/Class/Math_Foundations/data/scoreList2015v2.xlsx", sheetIndex = 1, rowIndex = 3:30, colIndex = 2:8, colClasses = c(rep("character", 2), rep("numeric", 5)), header = TRUE)
+total <- read.xlsx(file = "../data/scoreList2015v5.xlsx", sheetIndex = 1, rowIndex = 3:30, colIndex = 2:8, colClasses = c(rep("character", 2), rep("numeric", 5)), header = TRUE)
 total <- total[c(2, 1, 4:7, 3)]
 v.names.total <- c("ID", "Name", "Midterm", "Final", "Lab", "Offline", "Total")
 names(total) <- v.names.total
