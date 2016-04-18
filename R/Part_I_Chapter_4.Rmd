@@ -3,12 +3,12 @@ title: "Part I Chapter 4"
 output: html_document
 ---
 
-
+<!--
 ```{r, options}
-options(scipen = 7)
+options(scipen = 7, echo = FALSE)
 ```
-
-#### 예제 2-1.
+-->
+<!--#### 예제 2-1.
 
 ```{r, example 2-1, fig.width = 6, fig.height = 6}
 x <- seq(-2, 3, by = 0.01)
@@ -31,7 +31,7 @@ axis(side = 1, at = c(-27, 0, 27), labels = c(-27, 0, 27))
 abline(h = c(-3, 3), v = c(-27, 27), lty = 2)
 ```
 
-#### 예제 7.
+#### 예제 2-7.
 
 ```{r, example 2-7, fig.width = 6, fig.height = 6}
 x <- seq(-1.5, 4.5, by = 0.01)
@@ -86,25 +86,99 @@ abline(h = 0.6, lty = 2)
 
 ```{r, example 3-3-3, fig.width = 6, fig.height = 6}
 x <- seq(-2, 1, by = 0.01)
-y <- (3*x^2 - x - 2)/(5*x^2 + 4*x + 1)
+# y <- (3*x^2 - x - 2)/(5*x^2 + 4*x + 1)
 f.3.3 <- function(x){
   (3*x^2 - x - 2)/(5*x^2 + 4*x + 1)
   }
 f.3.3(c((-13 - 5*sqrt(2))/17, (-13 + 5*sqrt(2))/17))
+y <- f.3.3(x)
 plot(x, y, type = "l", xaxt = "n")
 abline(h = 0, v = 0, lty = 3)
 abline(h = 0.6, lty = 2)
 axis(side = 1, at = c((-13 - 5*sqrt(2))/17, (-13 + 5*sqrt(2))/17), labels = c("alpha", "beta"))
 ```
+-->
 
-```{r, example 3-4, fig.width = 6, fig.height = 6}
-x <- seq(-1, 3, by = 0.01)
+#### 예제 3-4.
+
+왜 $x$-축에 5/3를 꼭 포함시키는지 생각해 볼 것.
+
+```{r, example 3-4-1, fig.width = 6, fig.height = 6}
+x <- sort(c(seq(-3, 5, length = 1000), 5/3))
+f.3.4 <- function(x){
+  (sqrt(2*x^2 + 1))/(3*x - 5)
+  }
+f.3.4(c((-13 - 5*sqrt(2))/17, (-13 + 5*sqrt(2))/17))
+y <- f.3.4(x)
+plot(x, y, type = "l", ylim = c(-3, 5))
+abline(h = 0, v = 0, lty = 3)
+abline(h = c(-sqrt(2)/3, sqrt(2)/3), v =  5/3, lty = 2)
+```
+
+```{r, example 3-4-2, fig.width = 6, fig.height = 6}
+x <- sort(c(seq(-5, 7, length = 1000), 5/3))
 y <- (sqrt(2*x^2 + 1))/(3*x - 5)
 #f.3.4 <- function(x){
 #  (sqrt(2*x^2 + 1))/(3*x - 5)
 #  }
 #f.3.4(c((-13 - 5*sqrt(2))/17, (-13 + 5*sqrt(2))/17))
-plot(x, y, type = "l", ylim = c(-3, 5))
+plot(x, y, type = "l", ylim = c(-2, 2), xaxt = "n")
 abline(h = 0, v = 0, lty = 3)
 abline(h = c(-sqrt(2)/3, sqrt(2)/3), v =  5/3, lty = 2)
+axis(side = 1, at = c(-4, -2, 0, 5/3, 4, 6) , labels = c(-4, -2, 0, "5/3", 4, 6))
+axis(side = 2, at = c(-sqrt(2)/3, sqrt(2)/3), labels = c(expression(-frac(sqrt(2),3)), expression(frac(sqrt(2), 3))), las = 1)
+```
+----
+
+----
+
+----
+
+----
+
+----
+
+----
+
+#### 예제 4-1.
+
+```{r, example 4-1-1, fig.width = 6, fig.height = 6}
+x <- sort(c(seq(-3, 3, length = 1000), c(-1, 1)))
+f.4.1 <- function(x){
+  (2*x^2)/(x^2 - 1)
+  }
+y <- f.4.1(x)
+plot(x, y, type = "l", ylim = c( -5, 5))
+abline(h = 0, v = 0, lty = 3)
+abline(h = 2, v =  c(-1, 1), lty = 2)
+text(x = 2, y = 4, labels = expression(y==frac(2*x^2, x^2-1)))
+text(x = -2, y = 1.6, labels = expression(y==2))
+text(x = c(-1.5, 1.5), y = -4.5, labels = c(expression(x==-1), expression(x==1)))
+```
+
+----
+
+----
+
+----
+
+----
+
+----
+
+----
+
+#### 예제 4-2.
+
+```{r, example 4-2, fig.width = 6, fig.height = 6}
+x <- seq(-1, 4, length = 1000)
+f.4.2 <- function(x){
+  (x^2)/sqrt(x + 1)
+  }
+y <- f.4.2(x)
+plot(x, y, type = "l", xlim = c(-2, 4), ylim = c(-1, 5))
+abline(h = 0, v = 0, lty = 3)
+abline(v = -1, lty = 2)
+text(x = 2, y = 1, labels = expression(y==frac(x^2, sqrt(x+1))))
+text(x = -1.5, y = -0.5, labels = expression(x==-1))
 ```
