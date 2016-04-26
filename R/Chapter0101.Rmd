@@ -1,0 +1,60 @@
+---
+title: "Chapter0101"
+output: html_document
+---
+
+### 연습문제
+
+##### 1-1. $f(x)=1+x^2$
+
+```{r, fig.width=5, fig.height=5}
+curve(1+x^2, -5, 5)
+```
+
+##### 1-2. $f(x)=1-\sqrt(x)$
+
+```{r, fig.width=5, fig.height=5}
+curve(1-sqrt(x), 0, 100)
+```
+
+##### 1-3. $f(x)=\frac{1}{\sqrt(x)}$
+
+```{r, fig.width=5, fig.height=5}
+curve(1/sqrt(x), 0, 100)
+```
+
+##### 1-4. $f(x)=\frac{1}{1+\sqrt{x}}$
+
+```{r, fig.width=5, fig.height=5}
+curve(1/(1+sqrt(x)), 0, 100)
+```
+
+##### 1-5. $f(x)=\sqrt{4-x^2}$
+
+```{r, fig.width=5, fig.height=5}
+curve(sqrt(4-x^2), -2.0, 2.0)
+```
+
+##### 1-6. $f(x)=\frac{1}{\sqrt{9-x^2}}$
+
+```{r, fig.width=5, fig.height=5}
+curve(1/sqrt(9-x^2), -3.0, 3.0)
+```
+
+##### 1-7. $y=\sqrt{\frac{1}{x}-1}$
+
+```{r, fig.width=5, fig.height=5}
+curve(sqrt(1/x-1), 0, 1)
+```
+
+##### 1-8. $y=\sqrt{2-\sqrt{x}}$
+
+```{r, fig.width=5, fig.height=5}
+curve(sqrt(2-sqrt(x)), 0, 4)
+```
+
+##### 2-5. $f(x)=\frac{x}{|\,x\,|}$
+
+```{r, fig.width=5, fig.height=5}
+curve(x/abs(x), -5.0, 5.0)
+```
