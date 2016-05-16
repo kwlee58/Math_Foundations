@@ -5,28 +5,41 @@ output: html_document
 
 #### 예제 6.3.3
 
-근 찾기
+그래프 그리기ㄱ
 
-```{r, setup}
+```{r, graphs}
 x <- seq(-5, 5, by = 0.01)
 f.x.1 <- x/sqrt(x^2 + 1)
 f.x.2 <- x^4 - x
+# plot(x, f.x.1, type = "l", ylab ="")
 plot(x, f.x.1, type = "l", xlim = c(-1, 2), ylim = c(-2, 2), ylab ="")
 lines(x, f.x.2)
+abline(h = 0, v = 0, lty = 3)
+```
+
+근 찾기 
+
+```{r, roots}
 which(abs(f.x.1 - f.x.2) <= 0.1)
 which(abs(f.x.1 - f.x.2) <= 0.01)
-x[which(abs(f.x.1 - f.x.2) <= 0.01)]
+(index.min <-which(abs(f.x.1 - f.x.2) <= 0.01))
+x[index.min]
+# x[which(abs(f.x.1 - f.x.2) <= 0.01)]
 ```
 
 적분을 근사시키기
 
 ```{r, integral}
 x.r <- runif(1000, 0, 1.18)
+hist(x.r, prob = TRUE)
 f.x <- function(x) {x/sqrt(x^2 + 1) - (x^4 - x)}
 y <- f.x(x.r)
 mean(y)*1.18
+sd(y)
 x.r.2 <- runif(100000, 0, 1.18)
+hist(x.r.2, prob = TRUE, breaks = seq(0, 1.18, by = 0.02))
 y <- f.x(x.r.2)
 mean(y)*1.18
+sd(y)
 ```
 
