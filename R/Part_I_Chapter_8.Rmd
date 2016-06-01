@@ -1,0 +1,30 @@
+---
+title: "Part I _Chapter 8"
+author: "Coop711"
+date: "2016년 6월 1일"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r example 8.3.2, echo=FALSE}
+x <- seq(-1.99, 1.99, by = 0.01)
+fx.2 <- log(4-x^2)
+# plot(x, fx.2, type = "l", ylim = c(-2, 2))
+plot(x, fx.2, type = "l", xlim = c(-3, 3), ylim = c(-2, 2), ylab = expression(log(4-x^2)))
+abline(v = 0, h = 0, lty = 3)
+```
+
+```{r example 8.3.4, echo=FALSE}
+x <- seq(-4, 2, by = 0.01)
+fx.4 <- x*exp(x)
+plot(x, fx.4, type = "l", ylim = c(-0.5, 1), ylab = expression(x*e^x))
+abline(v = 0, h = 0, lty = 3)
+```
