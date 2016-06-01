@@ -1,0 +1,45 @@
+---
+title: "Part I Chapter 2.4"
+output: html_document
+---
+
+
+```{r, options}
+options(scipen = 7)
+```
+
+#### Example 1.
+
+```{r, ex 2.4-1, fig.width = 6, fig.height = 6}
+x <- seq(-3, 3, by = 0.01)
+y <- x^3 - 5*x + 6
+plot(x, y, xlim = c(-3, 3), ylim = c(-5, 15), type = "l")
+abline(h = 0, v = 0, lty = 2)
+plot(x, y, xlim = c(0.8, 1.2), ylim = c(1.6, 2.4), type = "l")
+abline(h = c(1.8, 2.2), lty = 2)
+points(x = 1, y = 2, pch = 20)
+text(x = 1.04, y = 2.0, labels = "(1, 2)")
+(xdelta <- seq(0.8, 1.2, by = 0.01))
+abs((xdelta^3 - 5*xdelta + 6) - 2) < 0.2
+xdelta[abs((xdelta^3 - 5*xdelta + 6) - 2) < 0.2] 
+plot(x, y, xlim = c(0.8, 1.2), ylim = c(1.6, 2.4), type = "l")
+abline(h = c(1.8, 2.2), lty = 2)
+points(x = 1, y = 2, pch = 20)
+text(x = 1.04, y = 2.0, labels = "(1, 2)")
+abline(v = c(0.92, 1.12), lty = 2)
+```
+
+#### 2.4-12
+
+```{r, 2.4-16, fig.width = 6, fig.height = 6}
+x <- seq(-3.5, -2.5, by = 0.01)
+y <- 1/(x + 3)^4
+plot(x, y, ylim = c(0, 20000), type = "l")
+abline(h = c(0, 10000), v = -3, lty = 2)
+(xdelta2 <- seq(-3.2, -2.8, by = 0.01))
+1/(xdelta2 + 3)^4 > 10000
+which(1/(xdelta2 + 3)^4 > 10000)
+xdelta2[1/(xdelta2 + 3)^4 > 10000]
+plot(x, y, xlim = c(-3.2, -2.8), ylim = c(5000, 15000), type = "l")
+abline(h = c(0, 10000), v = c(-3.09, -3, -2.9), lty = 2)
+```
