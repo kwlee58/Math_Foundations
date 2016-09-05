@@ -1,17 +1,12 @@
 ---
 title: "Chapter 1 class"
 author: "coop711"
-date: "2015년 9월 5일"
+date: "`r Sys.Date()`"
 output: html_document
 ---
  
 # 1.1 합과 곱
 
-* 작업 디렉토리 정리 
-
-```{r}
-setwd("~/Dropbox/Works/Class/Math_Foundations/")
-```
 
 ## 합의 기호 $\sum$
 
@@ -19,25 +14,29 @@ setwd("~/Dropbox/Works/Class/Math_Foundations/")
 
 * $a_1 = 80$, $a_2 = 75$, $a_3 = 90$, $a_4 = 83$, $a_5 = 70$
 
-```{r}
+```{r, example 1.1}
 a <- c(80, 75, 90, 83, 70)
 a
 a[1]
 a[c(2, 5)]
 a[-3]
 length(a)
+a[length(a)]
+l.a <- length(a)
+a[l.a]
 ```
 
 * 합의 계산
 
 $\sum_{i=1}^5 a_i$ 와 $\sum_{i=3}^{10} c_i$
 
-```{r}
+```{r, example 1.2}
+a[1] + a[2] + a[3] + a[4] + a[5]
 sum(a)
-b <- rev(a)
-b
-c <- c(a, b)
-c
+(b <- rev(a))
+# b
+(c <- c(a, b))
+# c
 c[3:10]
 sum(c[3:10])
 ```
@@ -46,31 +45,46 @@ sum(c[3:10])
 
 * $\sum_{i=1}^5 a_i^3$, $\sum_{i=1}^5 (a_i + b_i)$
 
-```{r}
+```{r, examps 1.3}
 a^3
 sum(a^3)
+a + b
+sum(a + b)
+sum(a) + sum(b)
 ```
+# 행렬
 
 * $a_{ij}$ 는 행렬의 $i$번째 행, $j$번째 열에 있는 원소를 지칭.
 
-```{r}
-A <- rbind(a, b)
-A
-dimnames(A) <- list(paste("r", 1:2, sep=""), paste("c", 1:5, sep=""))
+```{r, example 1.4}
+(A <- rbind(a, b))
+# A
+str(A)
+paste("r", 1:2)
+paste("r", 1:2, sep = "")
+paste("c", 1:5, sep = "")
+(dimnames(A) <- list("Row" = paste("r", 1:2, sep = ""), "Col" = paste("c", 1:5, sep = "")))
 A
 A[1, 1]
 A[2, 1]
 A[1, c(1, 3)]
 A[-1, ]
+str(A[2, ])
 A[, 1]
+str(A[, 1])
 A[, 1, drop = FALSE]
+str(A[, 1, drop = FALSE])
+B <- A
+B
+dimnames(B) <- NULL
+B
 ```
 
 ## 열의 합과 행의 합
  
 * $i=1, 2$ 행에 대하여 $j= 1, 2, 3$ 열에 속한 원소들의 합을 구하면
 
-```{r}
+```{r, example 1.5}
 A[1, 1:3]
 sum(A[1, 1:3])
 A[2, 1:3]
@@ -90,15 +104,20 @@ A[, 2]
 sum(A[, 2])
 A[, 1]
 sum(A[, 2])
+apply(A[, 1:3], 2, mean)
+sum(A[, 1]) + sum(A[, 2]) + sum(A[, 3])  
 apply(A[, 1:3], 2, sum)
-sum(A[, 1]) + sum(A[, 2]) + sum(A[, 2])  
 sum(apply(A[, 1:3], 2, sum))
 sum(A[, 1:3])
+apply(A, 1, sum)
+apply(A, 2, sum)
+rowSums(A)
+colSums(A)
 ```
 
 ## 곱의 기호 $\prod$
 
-```{r}
+```{r, example 1.6}
 a[1]*a[2]*a[3]*a[4]*a[5]
 prod(a)
 a + b
@@ -111,7 +130,7 @@ prod(a + b)
 
 * $\sum_{i=1}^n a_{ij} = a_{\cdot j}$, $\sum_{j=1}^m a_{ij} = a_{i\cdot}$
 
-```{r}
+```{r, example 1.7}
 A
 sum(A[, 1])
 sum(A[, 2])
@@ -128,7 +147,7 @@ rowSums(A)
 
 * $a_{\cdot\cdot} = \sum_{i=1}^n a_{i\cdot} = \sum_{j=1}^m a_{\cdot j} = \sum_{i=1}^n\sum_{j=1}^m a_{ij}$
 
-```{r}
+```{r, example 1.8}
 rowSums(A)
 sum(rowSums(A))
 colSums(A)
