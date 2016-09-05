@@ -142,26 +142,19 @@ a</code></pre>
 <pre><code>## [1] 80 75 83 70</code></pre>
 <pre class="r"><code>length(a)</code></pre>
 <pre><code>## [1] 5</code></pre>
-<pre class="r"><code>a[length(a)]</code></pre>
-<pre><code>## [1] 70</code></pre>
-<pre class="r"><code>l.a &lt;- length(a)
-a[l.a]</code></pre>
-<pre><code>## [1] 70</code></pre>
 <ul>
 <li>합의 계산</li>
 </ul>
 <p><span class="math inline">\(\sum_{i=1}^5 a_i\)</span> 와 <span class="math inline">\(\sum_{i=3}^{10} c_i\)</span></p>
-<pre class="r"><code>a[1] + a[2] + a[3] + a[4] + a[5]</code></pre>
-<pre><code>## [1] 398</code></pre>
 <pre class="r"><code>sum(a)</code></pre>
 <pre><code>## [1] 398</code></pre>
-<pre class="r"><code>(b &lt;- rev(a))</code></pre>
+<pre class="r"><code>b &lt;- rev(a)
+b</code></pre>
 <pre><code>## [1] 70 83 90 75 80</code></pre>
-<pre class="r"><code># b
-(c &lt;- c(a, b))</code></pre>
+<pre class="r"><code>c &lt;- c(a, b)
+c</code></pre>
 <pre><code>##  [1] 80 75 90 83 70 70 83 90 75 80</code></pre>
-<pre class="r"><code># c
-c[3:10]</code></pre>
+<pre class="r"><code>c[3:10]</code></pre>
 <pre><code>## [1] 90 83 70 70 83 90 75 80</code></pre>
 <pre class="r"><code>sum(c[3:10])</code></pre>
 <pre><code>## [1] 641</code></pre>
@@ -175,46 +168,19 @@ c[3:10]</code></pre>
 <pre><code>## [1] 512000 421875 729000 571787 343000</code></pre>
 <pre class="r"><code>sum(a^3)</code></pre>
 <pre><code>## [1] 2577662</code></pre>
-<pre class="r"><code>a + b</code></pre>
-<pre><code>## [1] 150 158 180 158 150</code></pre>
-<pre class="r"><code>sum(a + b)</code></pre>
-<pre><code>## [1] 796</code></pre>
-<pre class="r"><code>sum(a) + sum(b)</code></pre>
-<pre><code>## [1] 796</code></pre>
-</div>
-</div>
-<div class="section level1">
-<h1>행렬</h1>
 <ul>
 <li><span class="math inline">\(a_{ij}\)</span> 는 행렬의 <span class="math inline">\(i\)</span>번째 행, <span class="math inline">\(j\)</span>번째 열에 있는 원소를 지칭.</li>
 </ul>
-<pre class="r"><code>(A &lt;- rbind(a, b))</code></pre>
+<pre class="r"><code>A &lt;- rbind(a, b)
+A</code></pre>
 <pre><code>##   [,1] [,2] [,3] [,4] [,5]
 ## a   80   75   90   83   70
 ## b   70   83   90   75   80</code></pre>
-<pre class="r"><code># A
-str(A)</code></pre>
-<pre><code>##  num [1:2, 1:5] 80 70 75 83 90 90 83 75 70 80
-##  - attr(*, &quot;dimnames&quot;)=List of 2
-##   ..$ : chr [1:2] &quot;a&quot; &quot;b&quot;
-##   ..$ : NULL</code></pre>
-<pre class="r"><code>paste(&quot;r&quot;, 1:2)</code></pre>
-<pre><code>## [1] &quot;r 1&quot; &quot;r 2&quot;</code></pre>
-<pre class="r"><code>paste(&quot;r&quot;, 1:2, sep = &quot;&quot;)</code></pre>
-<pre><code>## [1] &quot;r1&quot; &quot;r2&quot;</code></pre>
-<pre class="r"><code>paste(&quot;c&quot;, 1:5, sep = &quot;&quot;)</code></pre>
-<pre><code>## [1] &quot;c1&quot; &quot;c2&quot; &quot;c3&quot; &quot;c4&quot; &quot;c5&quot;</code></pre>
-<pre class="r"><code>(dimnames(A) &lt;- list(&quot;Row&quot; = paste(&quot;r&quot;, 1:2, sep = &quot;&quot;), &quot;Col&quot; = paste(&quot;c&quot;, 1:5, sep = &quot;&quot;)))</code></pre>
-<pre><code>## $Row
-## [1] &quot;r1&quot; &quot;r2&quot;
-## 
-## $Col
-## [1] &quot;c1&quot; &quot;c2&quot; &quot;c3&quot; &quot;c4&quot; &quot;c5&quot;</code></pre>
-<pre class="r"><code>A</code></pre>
-<pre><code>##     Col
-## Row  c1 c2 c3 c4 c5
-##   r1 80 75 90 83 70
-##   r2 70 83 90 75 80</code></pre>
+<pre class="r"><code>dimnames(A) &lt;- list(paste(&quot;r&quot;, 1:2, sep=&quot;&quot;), paste(&quot;c&quot;, 1:5, sep=&quot;&quot;))
+A</code></pre>
+<pre><code>##    c1 c2 c3 c4 c5
+## r1 80 75 90 83 70
+## r2 70 83 90 75 80</code></pre>
 <pre class="r"><code>A[1, 1]</code></pre>
 <pre><code>## [1] 80</code></pre>
 <pre class="r"><code>A[2, 1]</code></pre>
@@ -225,36 +191,14 @@ str(A)</code></pre>
 <pre class="r"><code>A[-1, ]</code></pre>
 <pre><code>## c1 c2 c3 c4 c5 
 ## 70 83 90 75 80</code></pre>
-<pre class="r"><code>str(A[2, ])</code></pre>
-<pre><code>##  Named num [1:5] 70 83 90 75 80
-##  - attr(*, &quot;names&quot;)= chr [1:5] &quot;c1&quot; &quot;c2&quot; &quot;c3&quot; &quot;c4&quot; ...</code></pre>
 <pre class="r"><code>A[, 1]</code></pre>
 <pre><code>## r1 r2 
 ## 80 70</code></pre>
-<pre class="r"><code>str(A[, 1])</code></pre>
-<pre><code>##  Named num [1:2] 80 70
-##  - attr(*, &quot;names&quot;)= chr [1:2] &quot;r1&quot; &quot;r2&quot;</code></pre>
 <pre class="r"><code>A[, 1, drop = FALSE]</code></pre>
-<pre><code>##     Col
-## Row  c1
-##   r1 80
-##   r2 70</code></pre>
-<pre class="r"><code>str(A[, 1, drop = FALSE])</code></pre>
-<pre><code>##  num [1:2, 1] 80 70
-##  - attr(*, &quot;dimnames&quot;)=List of 2
-##   ..$ Row: chr [1:2] &quot;r1&quot; &quot;r2&quot;
-##   ..$ Col: chr &quot;c1&quot;</code></pre>
-<pre class="r"><code>B &lt;- A
-B</code></pre>
-<pre><code>##     Col
-## Row  c1 c2 c3 c4 c5
-##   r1 80 75 90 83 70
-##   r2 70 83 90 75 80</code></pre>
-<pre class="r"><code>dimnames(B) &lt;- NULL
-B</code></pre>
-<pre><code>##      [,1] [,2] [,3] [,4] [,5]
-## [1,]   80   75   90   83   70
-## [2,]   70   83   90   75   80</code></pre>
+<pre><code>##    c1
+## r1 80
+## r2 70</code></pre>
+</div>
 <div id="---" class="section level2">
 <h2>열의 합과 행의 합</h2>
 <ul>
@@ -297,30 +241,15 @@ B</code></pre>
 ## 80 70</code></pre>
 <pre class="r"><code>sum(A[, 2])</code></pre>
 <pre><code>## [1] 158</code></pre>
-<pre class="r"><code>apply(A[, 1:3], 2, mean)</code></pre>
-<pre><code>## c1 c2 c3 
-## 75 79 90</code></pre>
-<pre class="r"><code>sum(A[, 1]) + sum(A[, 2]) + sum(A[, 3])  </code></pre>
-<pre><code>## [1] 488</code></pre>
 <pre class="r"><code>apply(A[, 1:3], 2, sum)</code></pre>
 <pre><code>##  c1  c2  c3 
 ## 150 158 180</code></pre>
+<pre class="r"><code>sum(A[, 1]) + sum(A[, 2]) + sum(A[, 2])  </code></pre>
+<pre><code>## [1] 466</code></pre>
 <pre class="r"><code>sum(apply(A[, 1:3], 2, sum))</code></pre>
 <pre><code>## [1] 488</code></pre>
 <pre class="r"><code>sum(A[, 1:3])</code></pre>
 <pre><code>## [1] 488</code></pre>
-<pre class="r"><code>apply(A, 1, sum)</code></pre>
-<pre><code>##  r1  r2 
-## 398 398</code></pre>
-<pre class="r"><code>apply(A, 2, sum)</code></pre>
-<pre><code>##  c1  c2  c3  c4  c5 
-## 150 158 180 158 150</code></pre>
-<pre class="r"><code>rowSums(A)</code></pre>
-<pre><code>##  r1  r2 
-## 398 398</code></pre>
-<pre class="r"><code>colSums(A)</code></pre>
-<pre><code>##  c1  c2  c3  c4  c5 
-## 150 158 180 158 150</code></pre>
 </div>
 <div id="--prod" class="section level2">
 <h2>곱의 기호 <span class="math inline">\(\prod\)</span></h2>
@@ -340,10 +269,9 @@ B</code></pre>
 <li><p><span class="math inline">\(\sum_{i=1}^n a_{ij} = a_{\cdot j}\)</span>, <span class="math inline">\(\sum_{j=1}^m a_{ij} = a_{i\cdot}\)</span></p></li>
 </ul>
 <pre class="r"><code>A</code></pre>
-<pre><code>##     Col
-## Row  c1 c2 c3 c4 c5
-##   r1 80 75 90 83 70
-##   r2 70 83 90 75 80</code></pre>
+<pre><code>##    c1 c2 c3 c4 c5
+## r1 80 75 90 83 70
+## r2 70 83 90 75 80</code></pre>
 <pre class="r"><code>sum(A[, 1])</code></pre>
 <pre><code>## [1] 150</code></pre>
 <pre class="r"><code>sum(A[, 2])</code></pre>
@@ -388,10 +316,9 @@ B</code></pre>
 <li><p>합의 제곱</p></li>
 </ul>
 <pre class="r"><code>A</code></pre>
-<pre><code>##     Col
-## Row  c1 c2 c3 c4 c5
-##   r1 80 75 90 83 70
-##   r2 70 83 90 75 80</code></pre>
+<pre><code>##    c1 c2 c3 c4 c5
+## r1 80 75 90 83 70
+## r2 70 83 90 75 80</code></pre>
 <pre class="r"><code>sum(A[, 1])</code></pre>
 <pre><code>## [1] 150</code></pre>
 <pre class="r"><code>sum(A[, 1])^2</code></pre>
@@ -459,10 +386,9 @@ B</code></pre>
 <pre class="r"><code>sum(A[, 5]^2)</code></pre>
 <pre><code>## [1] 11300</code></pre>
 <pre class="r"><code>A^2</code></pre>
-<pre><code>##     Col
-## Row    c1   c2   c3   c4   c5
-##   r1 6400 5625 8100 6889 4900
-##   r2 4900 6889 8100 5625 6400</code></pre>
+<pre><code>##      c1   c2   c3   c4   c5
+## r1 6400 5625 8100 6889 4900
+## r2 4900 6889 8100 5625 6400</code></pre>
 <pre class="r"><code>colSums(A^2)</code></pre>
 <pre><code>##    c1    c2    c3    c4    c5 
 ## 11300 12514 16200 12514 11300</code></pre>
