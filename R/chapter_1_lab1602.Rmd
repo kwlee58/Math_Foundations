@@ -1,7 +1,7 @@
 ---
-title: "matrix_lab"
+title: "matrix_lab 1602"
 author: "coop711"
-date: "2015년 8월 31일"
+date: "`r Sys.Date()`"
 output: html_document
 ---
 
@@ -13,18 +13,27 @@ output: html_document
 ### a.
 
 ```{r, 1.a}
-M <- matrix(c(17, 19, 21, 31, 27, 23, 26, 16, 15, 11, 14, 16), nrow = 3)
+M <- matrix(c(17, 19, 21, 31, 27, 23, 26, 16, 15, 11, 14, 16), ncol = 4, nrow = 3)
 M
+# M1 <- matrix(c(17, 31, 26, 11, 19, 27, 16, 14, 21, 23, 15, 16), ncol = 4, byrow = TRUE)
+# M1
 rowSums(M)
-a1. <- rowSums(M)[1]
-a2. <- rowSums(M)[2]
-a3. <- rowSums(M)[3]
+(a1. <- rowSums(M)[1])
+(a2. <- rowSums(M)[2])
+(a3. <- rowSums(M)[3])
 c(a1., a2., a3.)
+str(c(a1., a2., a3.))
 c(a1. = a1., a2. = a2., a3. = a3.)
+str(c(a1. = a1., a2. = a2., a3. = a3.))
+c("a1." = a1., "a2." = a2., "a3." = a3.)
+c("a1." = a1., "a2." = a2., "a3." = a3.)
 M.row <- c(a1., a2., a3.)
 M.row
 names(M.row) <- c("a1.", "a2.", "a3.")
+# names(M.row) <- paste("a",1:4, ".", sep = "")
 M.row
+str(M.row)
+apply(M, 1, sum)
 ```
 
 ### b.
@@ -41,6 +50,8 @@ M.col <- c(a.1, a.2, a.3, a.4)
 M.col
 names(M.col) <- paste("a.",1:4, sep = "")
 M.col
+str(M.col)
+apply(M, 2, sum)
 ```
 
 ### c.
@@ -63,19 +74,26 @@ M[2, 2]
 M[3, 3]
 c1 <- matrix(c(1, 2, 3, 1, 2, 3), ncol = 2)
 M[c1]
+(c2 <- matrix(c(1:3, 2:4), ncol = 2))
+M[c2]
+(c3 <- matrix(c(1, 2, 1, 3), ncol = 2))
+M[c3]
+(c4 <- matrix(c(1, 3, 3, 4), ncol = 2))
+M[c4]
 sum(M[c1])
 rep(1:3, times = 2)
-c2 <- matrix(rep(1:3, 2), ncol = 2)
-M[c2]
+c5 <- matrix(rep(1:3, 2), ncol = 2)
+M[c5]
 rep(1:3, each = 2)
-c3 <- matrix(rep(1:3, each = 2), ncol = 2, byrow = TRUE)
-M[c3]
+c6 <- matrix(rep(1:3, each = 2), ncol = 2, byrow = TRUE)
+M[c6]
 ```
 
 ### e.
 
 ```{r, 1.e}
 M[, -2]
+# M[, c(1, 3, 4)]
 rowSums(M[, -2])
 ```
 
@@ -98,19 +116,26 @@ A
 ```{r, 2.a}
 a1. <- rowSums(A)[1]
 a.3 <- colSums(A)[3]
-c(a1. = a1., a.3 = a3.)
+c(a1. = a1., a.3 = a.3)
 ```
 
 ### b.
 
 ```{r, 2.b}
+A[1:3, 2, drop = FALSE]
+A[-4, 2, drop = FALSE]
 sum(A[-4, 2])
+A[c(1, 3, 4), 5]
+A[-2, 5]
 sum(A[-2, 5])
 ```
 
 ### c.
 
 ```{r, 2.c}
+rowSums(A)
+rowSums(A)[3:4]
+rowSums(A)[3:4]^2
 sum((rowSums(A)[3:4])^2)
 a.. <- sum(A)
 names(a..) <- "a.."
@@ -120,17 +145,21 @@ a..
 ### d.
 
 ```{r, 2.d}
+A[c(1, 3, 4), c(2, 3, 5)]
 A[-2, -c(1, 4)]
 sum(A[-2, -c(1, 4)])
-A[4, 1:3]
+A[4, 1:3, drop = FALSE]
 prod(A[4, 1:3])
-A[1:4, 4]
+A[1:4, 4, drop = FALSE]
+A[, 4, drop = FALSE]
 prod(A[1:4, 4])
 ```
 
 ### e.
 
 ```{r, 2.e}
+A[, 1, drop = FALSE]
+A[, 4, drop = FALSE]
 A[, 1] %*% A[, 4]
 20 * a..
 ```
@@ -141,7 +170,10 @@ A[, 1] %*% A[, 4]
 A2 <- A
 A2[, c(1, 3, 5)] <- -A2[, c(1, 3, 5)]
 A2
-sum(A2)
+sum
+A[2, -3]
+A[4, -3]
+(A[2, -3] - A[4, -3]) 
 (A[2, -3] - A[4, -3]) %*% (A[2, -3] - A[4, -3])
 ```
 
