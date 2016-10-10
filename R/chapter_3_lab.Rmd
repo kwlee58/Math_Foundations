@@ -2,7 +2,7 @@
 title: "Chapter 3 lab"
 author: "coop711"
 date: "2015년 9월 28일"
-output: html_document
+output: pdf_document
 ---
 
 ## 5. 
